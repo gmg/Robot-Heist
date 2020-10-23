@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -8,6 +9,16 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float movementSpeed = 8f; // movement speed in units per second
     private Rigidbody2D rb = null;
     private Vector2 movementInput;
+
+    void OnEnable()
+    {
+        PlayerHealth.OnPlayerDied += PlayerDied;
+    }
+
+    private void PlayerDied()
+    {
+        gameObject.SetActive(false);
+    }
 
     // Start is called before the first frame update
     void Start()

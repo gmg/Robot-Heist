@@ -25,8 +25,17 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void OnEnable() => PickUp.OnPickUpCollected += PickUpCollected;
-    private void OnDisable() => PickUp.OnPickUpCollected -= PickUpCollected;
+    private void OnEnable()
+    {
+        PickUp.OnPickUpCollected += PickUpCollected;
+        PlayerHealth.OnPlayerDied += PlayerDied;
+    }
+
+    private void OnDisable()
+    {
+        PickUp.OnPickUpCollected -= PickUpCollected;
+        PlayerHealth.OnPlayerDied -= PlayerDied;
+    }
 
     private void Start()
     {
@@ -42,5 +51,10 @@ public class GameManager : MonoBehaviour
     private void UpdateScoreUI()
     {
         ScoreUIText.text = $"Score: {score}";
+    }
+
+    private void PlayerDied()
+    {
+        Debug.Log("Player died, reload level");
     }
 }
