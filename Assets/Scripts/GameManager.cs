@@ -16,6 +16,7 @@ public class GameManager : MonoBehaviour
         if (Instance != null && Instance != this)
         {
             Destroy(gameObject);
+            Debug.LogWarning("Too many GameManager instances, deleting newest");
         }
         else
         {
